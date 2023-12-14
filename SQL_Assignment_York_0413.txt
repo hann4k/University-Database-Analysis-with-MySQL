@@ -1,0 +1,134 @@
+/**** Drops Employee table if already exists ****/
+IF OBJECT_ID(N'assessment.employee', N'U') IS NOT NULL  
+   DROP TABLE assessment.employee;  
+GO
+/**** Creating Employee table ****/
+CREATE TABLE employee (
+    id    int, 
+    fname varchar(255), 
+    lname varchar(255), 
+    age   int, 
+    hiredate  date
+);
+
+/**** Drops Address table if already exists ****/
+IF OBJECT_ID(N'address', N'U') IS NOT NULL  
+   DROP TABLE address;  
+GO
+/**** Creating Address table ****/
+CREATE TABLE address (
+    id  int,
+	address1 varchar(30),
+	address2 varchar(30), 
+	city varchar(30), 
+	state varchar(30),
+	zip varchar(30)
+);
+
+/**** Drops Contact table if already exists ****/
+IF OBJECT_ID(N'contact', N'U') IS NOT NULL  
+   DROP TABLE contact;  
+GO
+/**** Creating Contact table ****/
+CREATE TABLE contact (
+    id  int,
+    cellphone varchar(30), 
+    homephone varchar(30),
+    email varchar(30)
+);
+
+/**** Inserting data into Employee table ****/
+INSERT INTO employee(id, fname, lname, age, hiredate) 
+VALUES('01', 'Alan', 'Palmer',  '32',  '12/15/2019');
+INSERT INTO employee(id, fname, lname, age, hiredate) 
+VALUES('02', 'Susan', 'Shepard',  '28',  '07/21/2015');
+INSERT INTO employee(id, fname, lname, age, hiredate)
+ VALUES ('03', 'Justin','Ward',   '43', '08/24/2017');
+INSERT INTO employee(id, fname, lname, age, hiredate) 
+ VALUES    ('04', 'Alan', 'Smith',  '30',  '06/22/2017');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES     ('05', 'James', 'Betternot', '26', '06/22/17');
+INSERT INTO employee(id, fname, lname, age, hiredate) 
+VALUES    ('06', 'Ralph', 'White',  '44',  '06/23/17');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+ VALUES    ('07', 'Leonard', 'Nimoy', '72', '12/14/07');
+INSERT INTO employee (id, fname, lname, age, hiredate) 
+VALUES    ('08', 'Janice', 'Rand',  '61', '07/06/16');
+INSERT INTO employee (id, fname, lname, age, hiredate) 
+VALUES    ('09', 'Harry', 'Mudd', '65', '07/06/20');
+INSERT INTO employee (id, fname, lname, age, hiredate) 
+VALUES    ('10', 'Hikaru', 'Sulu', '58', '03/21/15');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES     ('11', 'James', 'Kirk',  '59', '01/02/14');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES     ('12', 'Leonard', 'McCoy', '65', '08/21/15');
+INSERT INTO employee(id, fname, lname, age, hiredate)
+VALUES     ('13', 'Pavel', 'Chekov',  '44', '10/15/14');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES     ('14', 'Christopher', 'Pike', '32', '11/24/14');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES     ('15', 'Darth', 'Vader', '124', '03/22/15');
+INSERT INTO employee (id, fname, lname, age, hiredate) 
+VALUES    ('16', 'Boba', 'Fett', '49', '03/22/15');
+INSERT INTO employee (id, fname, lname, age, hiredate) 
+VALUES    ('17', 'Luke', 'Skywalke','66', '11/11/19');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+ VALUES    ('18', 'Han', 'Solo', '73', '02/03/12');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES    ('19', 'Kylo', 'Ren',  '34', '06/14/20');
+INSERT INTO employee (id, fname, lname, age, hiredate)
+VALUES    ('20', 'Galen', 'Erso',  '55', '06/14/20');
+
+/**** Inserting data into Address table ****/
+INSERT INTO address(id, address1, address2, city, state,zip)
+ VALUES ('01', '1211 Sudan St', 'n/a', 'Mobile', 'AL', '36609');
+
+INSERT INTO address(id, address1, address2, city, state,zip) 
+VALUES ('02',  '4800 Barkshire Dr', 'n/a', 'Pace', 'FL', '32571');
+
+INSERT INTO address(id, address1, address2, city, state,zip)
+ VALUES ('03',  '12 Nutmeg Ct', 'n/a', 'Culver City', 'CA', '90211');
+
+INSERT INTO address(id, address1, address2, city, state,zip)
+ VALUES  ('04',  '2142 Elmwood Pl', 'n/a', 'Johnson City', 'TN', '37112');
+
+INSERT INTO address(id, address1, address2, city, state, zip)
+ VALUES  ('05', '777 Heavenly Ln', 'Box 13', 'Pike City', 'MN', '50877');
+ 
+/**** Inserting data into Contact table ****/
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('01', '5121325343', '5125234234', 'apalmer@yachtmail.com');
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('02', '5129739834', '5129847873', 'sshepard@yorkdevtraining.com');
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('03', '6453898502', '6459872345',  'jsward2007@yahoo.com');
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('04', '8763238756', '8763736548', 'alsmith999@gmail.com');
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('05', '8880345966', '8888567987', 'james.betternot@hotmail.com');
+INSERT INTO contact(id, cellphone, homephone, email) VALUES ('06', '3322827765', '3328760098', 'ralph.white264@aol.com');
+
+/**** Question 1 ****/
+select E.fname, E.lname, E.age, A.city,
+A.state
+FROM employee E
+INNER JOIN address A
+ON E.id=A.id
+WHERE E.fname='Alan';
+
+/**** Question 2 ****/
+select E.fname, E.lname, E.age, A.city,
+A.state,C.email
+FROM employee E
+INNER JOIN address A ON E.id=A.id
+INNER JOIN contact C ON A.id=C.id
+WHERE C.email='james.betternot@hotmail.com';
+
+/**** Question 3 ****/
+UPDATE contact
+SET cellphone='4383991212'
+WHERE id = (select id from employee where fname='Susan' AND lname='Shepard');
+
+/**** Question 4 ****/
+select E.id,E.fname,E.lname,E.age,E.hiredate,
+A.address1,A.address2,A.city,A.state,A.zip,
+C.cellphone,C.homephone,C.email
+FROM employee E
+INNER JOIN address A ON E.id=A.id
+INNER JOIN contact C ON A.id=C.id
+WHERE fname='Susan';
